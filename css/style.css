@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-font: 'Roboto Condensed', sans-serif;
+    --unnamed-color-ffffff: #FFFFFF;
+    --unnamed-color-ececec: #ECECEC;
+    --unnamed-color-c8c8c8: #C8C8C8;
+    --unnamed-color-385a64: #385A64;
+    --unnamed-color-2c444e: #2C444E;
+    --unnamed-color-1b2e35: #1B2E35;
+    --doing: #2D8EFF;
+    --testing: #FFCC3D;
+    --done: #13CE66;
+    --blocked: #FF4949;
+    --unnamed-color-c9ccc9: #C9CCC9;
+    --unnamed-color-444444: #444444;
+    --unnamed-color-2c2c2c: #2C2C2C;
+}
+
+/* == HEADER == */
+
+header {
+    width: 100%;
+    height: 60px;
+    background-color: var(--unnamed-color-2c444e);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--unnamed-color-c8c8c8);
+    font-size: 1.875rem;
+    font-weight: bold;
+    font-style: var(--primary-font);
+    height: 100%;
+    margin-bottom: 0;
+}
+
+
+.header-content strong {
+    color: var(--unnamed-color-ffffff);
+}
+
+/* Main Content */
+main {
+    height: 90vh;
+    width: 100%;
+    background-color: var(--unnamed-color-1b2e35);
+}
+
+.main-content {
+    height: 100%;
+    padding-top: 50px;
+}
+
+.task_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    font-weight: bold;
+    color: var(--unnamed-color-ffffff);
+    font-size: 21px;
+    border-bottom: 1px solid var(--unnamed-color-385a64);
+}
+
+.task_count {
+    color: var(--unnamed-color-385a64);
+    font-weight: normal;
+    font-size: 18px;
+}
+
+
+.task_header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.task_sinalizer {
+    display: block;
+    height: 16px;
+    width: 16px;
+    border-radius: 100%;
+    background-color: #FFFFFF;
+}
+
+.to-do-circle {
+    background-color: #ffffff;
+}
+
+.doing-circle {
+    background-color: #2D8EFF;
+}
+
+.testing-circle {
+    background-color: #FFCC3D;
+}
+
+.done-circle {
+    background-color: #13CE66;
+}
+
+.button-task_container {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.625rem;
+}
+
+.button-task_container button{
+    width: 100%;
+    height: 40px;
+    max-width: 240px;
+    border-radius: 20px;
+    border: 1px solid var(--unnamed-color-ffffff);
+    transition: all 0.5s ease;
+    font-weight: bold;
+    color: var(--unnamed-color-1b2e35);
+}
+
+.button-task_container button:hover {
+    background-color: var(--unnamed-color-1b2e35);
+    color: var(--unnamed-color-ffffff);
+}
+
+/* Área de digitar o texto */
+
+.task_box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.task_text {
+    height:90%;
+}
+
+.task_text textarea{
+    height: 100%;
+    width: 100%;
+}
+
+.task_footer {
+    height:10%;
+}
