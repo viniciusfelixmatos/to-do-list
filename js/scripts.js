@@ -42,39 +42,20 @@ function createTask(coluna) {
 
     // inserir o novo bloco na lista
     tasksList.appendChild(taskContent);
+
+    const editButton = document.querySelector(".task_edit")
+    const trashButton = document.querySelector(".task_delete");
+
+    editButton.addEventListener('click', () => {
+        const box = editButton.closest('.task_editor');
+        $('#modalEditTask').modal('show');
+    });
+
+    trashButton.addEventListener('click', () => {
+        const closestBox = trashButton.closest('.task_editor');
+        $('#modalDeleteTask').modal('show');
+    });
+
+
 }
 
-
-
-
-/* const tasktrigger = document.getElementById("button-task");
-
-tasktrigger.addEventListener('click', (e) => {
-    const taskContainer = document.querySelector(".task_content");
-    taskContainer.innerHTML = "";
-    const taskBox = document.createElement("Div");
-    taskBox.classList.add("task_box");
-    console.log("Aqui!")
-    taskBox.innerHTML = `
-        <div class="task_text">
-            <textarea></textarea>
-        </div>
-        
-        <div class="task_footer">
-            <span>
-                <i class="bi bi-arrow-up"></i>
-            </span>
-            <div class="task_editor">
-                <span>
-                    <i class="bi bi-pencil"></i>
-                </span>
-                <span>
-                    <i class="bi bi-trash"></i>
-                </span>
-            </div>
-        </div>
-    `;
-    taskContainer.appendChild(taskBox);
-})
-
-*/

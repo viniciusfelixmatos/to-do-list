@@ -200,3 +200,19 @@ main {
     color: var(--unnamed-color-ffffff);
     border-radius: 50%;
 }
+
+/* MODAL EDITOR */
+
+.task-editor-modal {
+    max-width: 400px;
+    max-height: 368px;
+}
+
+.modal-dialog-centered {
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--unnamed-color-1b2e35) !important;
+    color: var(--unnamed-color-ffffff) !important;
+}
