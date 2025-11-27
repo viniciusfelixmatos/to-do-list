@@ -24,8 +24,8 @@
     </header>
     <main>
         <div class="container-xl main-content">
-            <div class="row align-items-center">
-                <div class="col">
+            <div class="row tasks_columns">
+                <div class="col" id="todo">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer to-do-circle"></span>
@@ -35,12 +35,14 @@
                             <span>4 Total</span>
                         </div>
                     </div>
-                    <div class="task_content"></div>
+
+                    <div class="tasks_list"></div>
+
                     <div class="button-task_container">
                         <button>Add new task</button>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col" id="doing">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer doing-circle"></span>
@@ -50,12 +52,14 @@
                             <span>4 Total</span>
                         </div>
                     </div>
-                    <div class="task_content"></div>
+
+                    <div class="tasks_list"></div>
+
                     <div class="button-task_container">
                         <button>Add new task</button>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col" id="testing">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer testing-circle"></span>
@@ -65,12 +69,14 @@
                             <span>4 Total</span>
                         </div>
                     </div>
-                    <div class="task_content"></div>
+
+                    <div class="tasks_list"></div>
+
                     <div class="button-task_container">
                         <button>Add new task</button>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col" id="done">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer done-circle"></span>
@@ -80,15 +86,90 @@
                             <span>4 Total</span>
                         </div>
                     </div>
-                    <div class="task_content"></div>
+
+                    <div class="tasks_list"></div>
+
                     <div class="button-task_container">
-                        <button id="button-task">Add new task</button>
+                        <button>Add new task</button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
     <footer></footer>
+
+    <!-- MODAL: ADD TASK -->
+    <div class="modal fade" id="modalAddTask" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label">Task Title</label>
+                    <input type="text" id="addTaskTitle" class="form-control">
+
+                    <label class="form-label mt-3">Description</label>
+                    <textarea id="addTaskDescription" class="form-control"></textarea>
+
+                    <input type="hidden" id="addTaskColumn">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" id="confirmAddTask">Add Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: EDIT TASK -->
+    <div class="modal fade" id="modalEditTask" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label">Task Title</label>
+                    <input type="text" id="editTaskTitle" class="form-control">
+
+                    <label class="form-label mt-3">Description</label>
+                    <textarea id="editTaskDescription" class="form-control"></textarea>
+
+                    <input type="hidden" id="editTaskId">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" id="confirmEditTask">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: DELETE TASK -->
+    <div class="modal fade" id="modalDeleteTask" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this task?</p>
+                    <input type="hidden" id="deleteTaskId">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" id="confirmDeleteTask">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
 </body>
