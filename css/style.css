@@ -216,3 +216,135 @@ main {
     background-color: var(--unnamed-color-1b2e35) !important;
     color: var(--unnamed-color-ffffff) !important;
 }
+
+.modal-header {
+    border-bottom: none !important;
+}
+
+.modal-footer {
+    border-top: none !important; 
+}
+
+.form-control {
+    background-color: transparent !important;
+    border: 1px solid var(--unnamed-color-385a64) !important;
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+}
+
+.form-check-label {
+    font-family: var(--primary-font);
+    font-size: 21px;
+}
+
+.form-check {
+    display: flex !important;
+    align-items: baseline;
+    gap: 0.625rem;
+}
+
+.form-check-input {
+    background-color: transparent !important;
+    border: 1px solid var(--unnamed-color-ffffff) !important;
+}
+
+.form-check-input:hover {
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: var(--doing) !important;
+    border: 1px solid var(--unnamed-color-ffffff) !important;
+    padding: 1px;
+}
+
+.form-check-input:checked[type=radio] {
+    background-image: none;
+}
+
+.modal-body {
+    text-align: center;
+    font-size: 18px;
+}
+
+.delete-modal {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.button-modal-delete {
+    width: 100%;
+    height: 40px;
+    max-width: 115px;
+    border-radius: 20px;
+    border: 1px solid var(--unnamed-color-ffffff);
+    transition: all 0.5s ease;
+    font-weight: bold;
+    color: var(--unnamed-color-1b2e35);
+    background-color: var(--blocked) !important;
+    font-family: var(--primary-font) !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    border-radius: 20px !important;
+    transition: all ease 0.5s;
+}
+
+.button-modal-delete:hover {
+    background-color: var(--unnamed-color-1b2e35) !important;
+    color: var(--blocked) !important;
+}
+
+.button-modal-cancel {
+    width: 100%;
+    height: 40px;
+    max-width: 115px;
+    border-radius: 20px;
+    border: 1px solid var(--unnamed-color-ffffff);
+    transition: all 0.5s ease;
+    font-weight: bold;
+    color: var(--unnamed-color-1b2e35) !important;
+    background-color: var(--unnamed-color-ffffff) !important;
+    font-family: var(--primary-font) !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    border-radius: 20px !important;
+    transition: all ease 0.5s;
+}
+
+.button-modal-cancel:hover {
+    background-color: var(--unnamed-color-1b2e35) !important;
+    color: var(--unnamed-color-ffffff) !important;
+    border: 1px solid var(--unnamed-color-ffffff) !important;
+}
+
+.button-modal-save {
+    width: 100%;
+    height: 40px;
+    max-width: 115px;
+    border-radius: 20px;
+    border: 1px solid var(--unnamed-color-ffffff) !important;
+    transition: all 0.5s ease;
+    font-weight: bold;
+    color: var(--unnamed-color-1b2e35) !important;
+    background-color: var(--unnamed-color-ffffff) !important;
+    font-family: var(--primary-font) !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    border-radius: 20px !important;
+    transition: all ease 0.5s;
+}
+
+.button-modal-save:hover {
+    background-color: var(--unnamed-color-1b2e35) !important;
+    color: var(--unnamed-color-ffffff) !important;
+}
+
+.btn-close {
+    background-color: var(--blocked) !important;
+    border-radius: 50% !important;
+    color: var(--unnamed-color-ffffff) !important;
+}
