@@ -25,7 +25,7 @@
     <main>
         <div class="container-xl main-content">
             <div class="row tasks_columns">
-                <div class="col" id="todo">
+                <div class="col to-do" id="todo">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer to-do-circle"></span>
@@ -42,7 +42,7 @@
                         <button>Add new task</button>
                     </div>
                 </div>
-                <div class="col" id="doing">
+                <div class="col doing" id="doing">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer doing-circle"></span>
@@ -59,7 +59,7 @@
                         <button>Add new task</button>
                     </div>
                 </div>
-                <div class="col" id="testing">
+                <div class="col testing" id="testing">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer testing-circle"></span>
@@ -76,7 +76,7 @@
                         <button>Add new task</button>
                     </div>
                 </div>
-                <div class="col" id="done">
+                <div class="col done" id="done">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer done-circle"></span>
@@ -100,24 +100,52 @@
 
     <!-- MODAL: ADD TASK -->
     <div class="modal fade" id="modalAddTask" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content task-editor-modal">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add New Task</h5>
+                    <h5 class="modal-title">Add task</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <label class="form-label">Task Title</label>
-                    <input type="text" id="addTaskTitle" class="form-control">
+                    <input type="text" id="editTaskTitle" class="form-control">
 
-                    <label class="form-label mt-3">Description</label>
-                    <textarea id="addTaskDescription" class="form-control"></textarea>
+                    <label class="form-label mt-3">Task status</label>
+                    <div class="checkbox-container">
+                        <div class="checkbox_content">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    To do
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Testing
+                                </label>
+                            </div>
+                        </div>
+                        <div class="checkbox_contet">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                                <label class="form-check-label" for="flexRadioDefault3">
+                                    Doing
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
+                                <label class="form-check-label" for="flexRadioDefault4">
+                                    Done
+                                </label>
+                            </div>
+                        </div>
+                    </div>
 
-                    <input type="hidden" id="addTaskColumn">
+                    <input type="hidden" id="editTaskId">
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button class="btn btn-success" id="confirmAddTask">Add Task</button>
+                    <button class="btn btn-primary button-modal-save" id="confirmAddTask">Confirm</button>
                 </div>
             </div>
         </div>
@@ -195,6 +223,6 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
+    <script src="js/scripts.js" defer></script>
 </body>
 </html>
