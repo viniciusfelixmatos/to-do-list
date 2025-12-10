@@ -134,7 +134,7 @@ main {
     color: var(--unnamed-color-ffffff);
 }
 
-/* Área de digitar o texto */
+/* TASK CONTAINER */
 
 .task_box {
     display: flex;
@@ -199,7 +199,41 @@ main {
     border: 1px solid var(--unnamed-color-385a64);
     color: var(--unnamed-color-ffffff);
     border-radius: 50%;
+    transition: all 0.5s ease;
 }
+
+.task_editor span:hover {
+    cursor: pointer;
+    background-color: var(--unnamed-color-385a64);
+}
+
+.tasks_list {
+    min-height: 20px;
+}
+
+.task_move {
+    display: flex;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    align-items: center;
+    color: var(--unnamed-color-ffffff);
+    border-radius: 50%;
+    transition: all 0.5s ease;
+}
+
+.task_move:hover {
+    cursor: pointer;
+    background-color: var(--unnamed-color-385a64);
+}
+
+.task_placeholder {
+    background: #dcdcdc;
+    border-radius: 6px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
 
 /* MODAL EDITOR */
 
@@ -228,6 +262,7 @@ main {
 .form-control {
     background-color: transparent !important;
     border: 1px solid var(--unnamed-color-385a64) !important;
+    color: var(--unnamed-color-ffffff) !important;
 }
 
 .checkbox-container {
@@ -269,6 +304,10 @@ main {
 .modal-body {
     text-align: left;
     font-size: 18px;
+}
+
+.delete-body {
+    text-align: center;
 }
 
 .delete-modal {
@@ -347,4 +386,47 @@ main {
     background-color: var(--blocked) !important;
     border-radius: 50% !important;
     color: var(--unnamed-color-ffffff) !important;
+    opacity: 1 !important;
 }
+
+.btn-close:hover {
+    background-color: var(--unnamed-color-1b2e35) !important;
+    color: var(--blocked) !important;
+}
+
+/* RESPONSIVO */
+
+/* --- RESPONSIVO: CARROSSEL HORIZONTAL --- */
+@media (max-width: 1024px) {
+
+    .tasks_columns {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        gap: 1rem;
+        /* Rolagem suave */
+        scroll-behavior: smooth;
+        /* Remover scrollbar */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .tasks_columns::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Cada coluna vira um "slide" */
+    .tasks_columns .col {
+        flex: 0 0 auto;
+        width: 295px;
+        max-width: 295px;
+        min-width: 295px;
+    }
+
+    .task_container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+

@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,69 +23,69 @@
     <main>
         <div class="container-xl main-content">
             <div class="row tasks_columns">
-                <div class="col to-do" id="todo">
+                <div class="col to-do" id="todo" data-column="to-do">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer to-do-circle"></span>
                             <span>To Do</span>
                         </div>
-                        <div class="task_count">
-                            <span>4 Total</span>
+                        <div class="task_count" data-column="to-do">
+                            <span>0 Total</span>
                         </div>
                     </div>
 
-                    <div class="tasks_list"></div>
+                    <div class="tasks_list to-do_list"></div>
 
                     <div class="button-task_container">
                         <button>Add new task</button>
                     </div>
                 </div>
-                <div class="col doing" id="doing">
+                <div class="col doing" id="doing" data-column="doing">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer doing-circle"></span>
                             <span>Doing</span>
                         </div>
-                        <div class="task_count">
-                            <span>4 Total</span>
+                        <div class="task_count" data-column="doing">
+                            <span>0 Total</span>
                         </div>
                     </div>
 
-                    <div class="tasks_list"></div>
+                    <div class="tasks_list doing_list"></div>
 
                     <div class="button-task_container">
                         <button>Add new task</button>
                     </div>
                 </div>
-                <div class="col testing" id="testing">
+                <div class="col testing" id="testing" data-column="testing">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer testing-circle"></span>
                             <span>Testing</span>
                         </div>
-                        <div class="task_count">
-                            <span>4 Total</span>
+                        <div class="task_count" data-column="testing">
+                            <span>0 Total</span>
                         </div>
                     </div>
 
-                    <div class="tasks_list"></div>
+                    <div class="tasks_list testing_list"></div>
 
                     <div class="button-task_container">
                         <button>Add new task</button>
                     </div>
                 </div>
-                <div class="col done" id="done">
+                <div class="col done" id="done" data-column="done">
                     <div class="task_container">
                         <div class="task_header">
                             <span class="task_sinalizer done-circle"></span>
                             <span>Done</span>
                         </div>
-                        <div class="task_count">
-                            <span>4 Total</span>
+                        <div class="task_count" data-column="done">
+                            <span>0 Total</span>
                         </div>
                     </div>
 
-                    <div class="tasks_list"></div>
+                    <div class="tasks_list done_list"></div>
 
                     <div class="button-task_container">
                         <button>Add new task</button>
@@ -114,13 +112,13 @@
                     <div class="checkbox-container">
                         <div class="checkbox_content">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="todo">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     To do
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="testing" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Testing
                                 </label>
@@ -128,13 +126,13 @@
                         </div>
                         <div class="checkbox_contet">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="doing">
                                 <label class="form-check-label" for="flexRadioDefault3">
                                     Doing
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" value="done" checked>
                                 <label class="form-check-label" for="flexRadioDefault4">
                                     Done
                                 </label>
@@ -208,21 +206,25 @@
     <div class="modal fade" id="modalDeleteTask" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body">
+                <div class="modal-body delete-body">
                     <p>Are you sure you want to delete this task?</p>
                     <input type="hidden" id="deleteTaskId">
                 </div>
                 <div class="modal-footer delete-modal">
                     <button class="btn btn-secondary button-modal-cancel" data-bs-dismiss="modal">Cancel</button>
-                    <button class="btn btn-danger button-modal-delete" id="confirmDeleteTask">Delete</button>
+                    <button class="btn btn-danger button-modal-delete" id="confirmDeleteTask" onclick="deleteTask()">Delete</button>
                 </div>
             </div>
         </div>
     </div>
 
-
-
+    <!-- BOOTSTRAP JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- SCRIPTS JS -->
     <script src="js/scripts.js" defer></script>
 </body>
 </html>
