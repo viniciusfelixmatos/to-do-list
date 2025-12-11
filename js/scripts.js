@@ -9,16 +9,18 @@ buttonAddTask.forEach(button => { // para cada botão
 });
 
 /* CRIAR A TASK AO CLICAR EM CONFIRM */
-const addTaskButton = document.getElementById('confirmAddTask');
-    addTaskButton.addEventListener('click', () => {
-        createTask();
+const addTaskButton = document.getElementById('confirmAddTask'); // Armazena 'confirmTask' em uma constante
+    addTaskButton.addEventListener('click', () => { // Evento de clique sobre a constante
+        createTask(); // Chama a função createTask()
     });
 
 /* FUNÇÃO PARA CRIAR A TASK */
 function createTask() {
+    /* CHAMANDO A FUNÇÃO PARA GERAR O ID */
+    let numero = randomInt(1, 1000); // inteiro entre 1 e 100
+
     /* SELECIONAR OS INPUTS MARCADOS */
     const selectedColumn = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-
     /* OBJETO GUARDANDO OS PARES */
     const columnMap = {
         "todo": document.querySelector(".to-do_list"),
@@ -29,19 +31,23 @@ function createTask() {
     /* SELCIONA A COLUNA COM BASE NO VALOR MARCADO NO INPUT */
     const tasksList = columnMap[selectedColumn];
 
-    // criar o bloco task_content (este é o que deve ser repetido)
+    // CRIAR O BLOCO TASK_CONTENT RESPONSÁVEL POR ENCAPSULAR CADA TASK
     const taskContent = document.createElement("div");
     taskContent.classList.add("task_content");
 
     // CAPTURANDO VALORES DO QUE FOI ESCRITO NO MODAL
     let inputTitle = document.getElementById('editTaskTitle');
     let valueTitle = inputTitle.value;
+    if(valueTitle == '') {
+        valueTitle = 'New Task';
+    };
 
-    // conteúdo interno da task
+
+    // CONTEÚDO INTERNO DA TASK
     taskContent.innerHTML = `
-        <div class="task_box">
+        <div class="task_box" id=${numero}>
             <div class="task_text">
-                <span>${valueTitle || 'New Task'}</span>
+                <span>${valueTitle}</span>
             </div>
 
             <div class="task_footer">
@@ -67,6 +73,39 @@ function createTask() {
     inputTitle.value = "";
     $('#modalAddTask').modal('hide');
     countTasks();
+    updateArrayTask(numero, valueTitle, selectedColumn);
+}
+
+// FUNÇÃO PARA CRIAR OS NÚMEROS DE ID
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+let all_tasks = [] // ARRAY QUE IRÁ GUARDAR AS TASKS QUE SERÃO SALVAS NO LOCALSTORAGE
+
+console.log(all_tasks)
+
+// FUNÇÃO PARA ADICIONAR A TASK CRIADA AO ARRAY DO LOCAL STORAGE
+function updateArrayTask(id, title, status) {
+
+    // A função recebe o 'id', 'titulo' e 'status' como parâmetro
+    all_tasks.push({id, title, status}); // O metodo push vai criar os objetos com as informações de cada tasks
+
+    all_tasks.forEach(task => {
+ 
+    if(task.status === 'done'){
+        console.log('taks feita');
+    } else {
+        console.log('outro status')
+    }
+    })
+
+    // all_tasks[0].id = id,
+    // all_tasks[0].title = title,
+    // all_tasks[0].status = status
+
+    console.log(all_tasks);
+    localStorage.setItem('allTasks', JSON.stringify(all_tasks));
 }
 
 /* FUNÇÃO PARA ARIR O MODAL DE EDITAR */
@@ -87,6 +126,7 @@ function deleteTask() {
         taskToDelete = null;
     }
     $('#modalDeleteTask').modal('hide');
+    countTasks();
 }
 
 /* FUNÇÃO PARA CONTAR QUANTAS TASKS FORAM CRIADAS */
@@ -103,6 +143,8 @@ function countTasks() {
         countElement.querySelector('span').textContent = `${taskCount} Total`;
     });
 }
+
+
 
 function updateTask(element) {
     // pega o card inteiro

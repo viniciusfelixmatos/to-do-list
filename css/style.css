@@ -27,6 +27,7 @@ header {
     width: 100%;
     height: 60px;
     background-color: var(--unnamed-color-2c444e);
+    position: absolute;
 }
 
 .header-content {
@@ -41,21 +42,31 @@ header {
     margin-bottom: 0;
 }
 
-
 .header-content strong {
     color: var(--unnamed-color-ffffff);
 }
 
 /* Main Content */
 main {
-    height: 90vh;
+    height: 100vh;
     width: 100%;
     background-color: var(--unnamed-color-1b2e35);
 }
 
 .main-content {
     height: 100%;
-    padding-top: 50px;
+    padding-top: 6.25rem;
+}
+
+.main-content::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 50px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--unnamed-color-1b2e35));
+    pointer-events: none;
 }
 
 .tasks_columns {
@@ -208,7 +219,7 @@ main {
 }
 
 .tasks_list {
-    min-height: 20px;
+    min-height: 40px;
 }
 
 .task_move {
