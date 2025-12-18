@@ -1,3 +1,60 @@
+// EXECUTAR A FUNÇÃO APÓS O CARREGAMENTO DA PÁGINA
+window.addEventListener("DOMContentLoaded", () => {
+    loadTasks(); // Chama a função loadTasks()
+    countTasks(); // Chama a função countTasks()
+});
+
+function loadTasks() {
+    // Carregar tarefas de cada status do localStorage
+    const allTasks = {
+        todo: JSON.parse(localStorage.getItem('toDoTasks')) || [],
+        doing: JSON.parse(localStorage.getItem('doingTasks')) || [],
+        testing: JSON.parse(localStorage.getItem('testingTasks')) || [],
+        donetaks: JSON.parse(localStorage.getItem('doneTasks')) || []
+    };
+    console.log(allTasks);
+    // Iterar sobre cada status e suas tarefas
+    for (const status in allTasks) {
+       console.log(`Carregando tarefas para o status: ${status}`);
+       allTasks[status].forEach(task=> {
+        console.log(status);
+            console.log(`Carregando tarefa: ${task.title} (ID: ${task.id})`);
+            // Selecionar a lista de tarefas correspondente
+            const TaskSelect = document.querySelector(`.${status}_list`);
+            if (!TaskSelect) return;
+            console.log(`Adicionando tarefa à coluna: ${status}`);
+            // Criar o bloco task_content
+            const taskContent = document.createElement("div");
+            taskContent.classList.add("task_content");
+            // Definir o conteúdo interno da tarefa
+            taskContent.innerHTML = `
+                <div class="task_box" id=${task.id}>
+                    <div class="task_text">
+                        <span>${task.title}</span>
+                    </div>
+
+                    <div class="task_footer">
+                        <span class="task_move" onclick="updateTask(this)">
+                            <i class="bi bi-arrow-up"></i>
+                        </span>
+
+                        <div class="task_editor">
+                            <span class="task_edit" onclick="openEditModal()">
+                                <i class="bi bi-pencil"></i>
+                            </span>
+                            <span class="task_delete" onclick="openDelModal(this)">
+                                <i class="bi bi-trash"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            // Adicionar a tarefa à lista correspondente
+            TaskSelect.appendChild(taskContent);
+            console.log(`Tarefa ${task.title} adicionada à coluna ${status}`);
+       });
+    }
+};
 /* SELECIONANDO O BOTÃO DE CRIAR TASK */
 const buttonAddTask = document.querySelectorAll(".button-task_container button");
 
@@ -42,7 +99,6 @@ function createTask() {
         valueTitle = 'New Task';
     };
 
-
     // CONTEÚDO INTERNO DA TASK
     taskContent.innerHTML = `
         <div class="task_box" id=${numero}>
@@ -74,38 +130,47 @@ function createTask() {
     $('#modalAddTask').modal('hide');
     countTasks();
     updateArrayTask(numero, valueTitle, selectedColumn);
+    // 'numero' é o ID gerado aleatoriamente
+    // 'valueTitle' é o título da task
+    // 'selectedColumn' é a coluna onde a task foi criada, ou seja, 'todo', 'doing', 'testing' ou 'done'
 }
 
 // FUNÇÃO PARA CRIAR OS NÚMEROS DE ID
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+// ARRAY PARA GUARDAR AS TASKS
+let to_do_tasks = []
+let doing_tasks = []
+let testing_tasks = []
+let done_tasks = []
 
-let all_tasks = [] // ARRAY QUE IRÁ GUARDAR AS TASKS QUE SERÃO SALVAS NO LOCALSTORAGE
-
-console.log(all_tasks)
-
-// FUNÇÃO PARA ADICIONAR A TASK CRIADA AO ARRAY DO LOCAL STORAGE
+// FUNÇÃO PARA ADICIONAR A TASK NO ARRAY
 function updateArrayTask(id, title, status) {
 
-    // A função recebe o 'id', 'titulo' e 'status' como parâmetro
-    all_tasks.push({id, title, status}); // O metodo push vai criar os objetos com as informações de cada tasks
-
-    all_tasks.forEach(task => {
- 
-    if(task.status === 'done'){
-        console.log('taks feita');
-    } else {
-        console.log('outro status')
+    // Verifica o status e adiciona ao array correspondente
+    if (status === 'to-do') {
+        to_do_tasks.push({id, title, status});
+        localStorage.setItem('toDoTasks', JSON.stringify(to_do_tasks));
+        console.log('Tarefa adicionada em To Do');
+    } else if (status === 'doing') {
+        doing_tasks.push({id, title, status});
+        localStorage.setItem('doingTasks', JSON.stringify(doing_tasks));
+        console.log('Tarefa adicionada em Doing');
+    } else if (status === 'testing') {
+        testing_tasks.push({id, title, status});
+        localStorage.setItem('testingTasks', JSON.stringify(testing_tasks));
+        console.log('Tarefa adicionada em Testing');
+    } else if (status === 'done') {
+        done_tasks.push({id, title, status});
+        localStorage.setItem('doneTasks', JSON.stringify(done_tasks));
+        console.log('Tarefa adicionada em Done');
     }
-    })
 
     // all_tasks[0].id = id,
     // all_tasks[0].title = title,
     // all_tasks[0].status = status
-
-    console.log(all_tasks);
-    localStorage.setItem('allTasks', JSON.stringify(all_tasks));
+    // localStorage.setItem('allTasks', JSON.stringify(all_tasks));
 }
 
 /* FUNÇÃO PARA ARIR O MODAL DE EDITAR */
@@ -203,6 +268,3 @@ $(function () {
         }
     }).disableSelection();
 });
-
-
-
