@@ -219,7 +219,13 @@ main {
 }
 
 .tasks_list {
-    min-height: 40px;
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--unnamed-color-385a64) transparent;
+    padding-right: 8px;
+    box-sizing: border-box;
 }
 
 .task_move {
@@ -260,9 +266,12 @@ main {
 .modal-content {
     background-color: var(--unnamed-color-1b2e35) !important;
     color: var(--unnamed-color-ffffff) !important;
+    box-shadow: 0px 0px 10px var(--unnamed-color-385a64) !important;
 }
 
 .modal-header {
+    display: flex;
+    justify-content: space-between;
     border-bottom: none !important;
 }
 
@@ -342,7 +351,6 @@ main {
     border-radius: 20px !important;
     transition: all ease 0.5s;
 }
-
 .button-modal-delete:hover {
     background-color: var(--unnamed-color-1b2e35) !important;
     color: var(--blocked) !important;
@@ -393,19 +401,33 @@ main {
     color: var(--unnamed-color-ffffff) !important;
 }
 
-.btn-close {
-    background-color: var(--blocked) !important;
-    border-radius: 50% !important;
-    color: var(--unnamed-color-ffffff) !important;
-    opacity: 1 !important;
+/* BOTÃO DE FECHAR DO MODAL DE EDITAR */
+.modal-close {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--blocked);
+    border: 1px solid var(--blocked);
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
 }
 
-.btn-close:hover {
-    background-color: var(--unnamed-color-1b2e35) !important;
-    color: var(--blocked) !important;
+.modal-close i {
+    font-size: 1rem;
+    color: var(--unnamed-color-ffffff); /* X branco */
+    transition: color 0.2s ease;
 }
 
-/* RESPONSIVO */
+.modal-close:hover {
+    background-color: var(--unnamed-color-1b2e35);
+}
+
+.modal-close:hover i {
+    color: var(--blocked); /* X vermelho */
+}
 
 /* --- RESPONSIVO: CARROSSEL HORIZONTAL --- */
 @media (max-width: 1024px) {
@@ -438,6 +460,18 @@ main {
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+
+    .tasks_list {
+        max-height: calc(100vh - 260px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        touch-action: pan-y;
+        padding-right: 12px;
+    }
+
+    .task {
+        touch-action: manipulation;
     }
 }
 
