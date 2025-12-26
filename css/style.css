@@ -226,6 +226,7 @@ main {
     scrollbar-color: var(--unnamed-color-385a64) transparent;
     padding-right: 8px;
     box-sizing: border-box;
+    min-height: 50px;
 }
 
 .task_move {
