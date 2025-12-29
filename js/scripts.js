@@ -199,53 +199,40 @@ function openDelModal(element) {
     $('#modalDeleteTask').modal('show');
 }
 
+// FUNÇÃO PARA DELETAR A TASK
 function deleteTask() {
     if (!taskToDelete) return;
 
-    // 🔴 sincroniza antes de qualquer coisa
-    syncTasksFromStorage();
-
+    // PEGAR INFORMAÇÕES DA TASK A SER DELETADA
     const taskBox = taskToDelete.querySelector('.task_box');
-    if (!taskBox) return;
-
     const taskId = String(taskBox.id);
-
     const column = taskToDelete.closest('.col');
-    if (!column) return;
-
     const status = column.dataset.column;
 
+    // MAPEAMENTO DOS ARRAYS E CHAVES DO LOCALSTORAGE
     const map = {
-        todo: { array: to_do_tasks, storage: 'toDoTasks' },
-        doing: { array: doing_tasks, storage: 'doingTasks' },
-        testing: { array: testing_tasks, storage: 'testingTasks' },
-        done: { array: done_tasks, storage: 'doneTasks' }
+        todo: 'toDoTasks',
+        doing: 'doingTasks',
+        testing: 'testingTasks',
+        done: 'doneTasks'
     };
 
-    if (!map[status]) return;
+    // VERIFICA A CHAVE DO LOCALSTORAGE COM BASE NO STATUS
+    const storageKey = map[status];
+    if (!storageKey) return;
 
-    const list = map[status].array;
+    // PEGA A LISTA ATUAL DO LOCALSTORAGE
+    let currentTasks = JSON.parse(localStorage.getItem(storageKey)) || [];
 
-    const index = list.findIndex(
-        task => String(task.id) === taskId
-    );
+    // FILTRA A LISTA REMOVENDO A TASK COM O ID ESPECIFICADO
+    const updatedTasks = currentTasks.filter(task => String(task.id) !== taskId);
 
-    if (index === -1) {
-        console.warn('Task não encontrada no storage:', taskId);
-        return;
-    }
+    // ATUALIZA O LOCALSTORAGE COM A LISTA ATUALIZADA
+    localStorage.setItem(storageKey, JSON.stringify(updatedTasks));
 
-    list.splice(index, 1);
-
-    localStorage.setItem(
-        map[status].storage,
-        JSON.stringify(list)
-    );
-
-    // remove do DOM por último
+    // REMOVE A TASK DO DOM
     taskToDelete.remove();
     taskToDelete = null;
-
     $('#modalDeleteTask').modal('hide');
     countTasks();
 };
@@ -352,14 +339,6 @@ function countTasks() {
     });
 }
 
-// FUNÇÃO PARA SINCRONIZAR AS TASKS DO LOCALSTORAGE
-function syncTasksFromStorage() {
-    to_do_tasks = JSON.parse(localStorage.getItem('toDoTasks')) || [];
-    doing_tasks = JSON.parse(localStorage.getItem('doingTasks')) || [];
-    testing_tasks = JSON.parse(localStorage.getItem('testingTasks')) || [];
-    done_tasks = JSON.parse(localStorage.getItem('doneTasks')) || [];
-}
-
 /* FUNÇÃO PARA ATUALIZAR A TASK DE UMA COLUNA PARA OUTRA */
 function updateTask(element) {
     const taskContent = element.closest('.task_content');
@@ -399,7 +378,6 @@ function updateTask(element) {
 
 // FUNÇÃO PARA MOVER A TASK NO LOCALSTORAGE
 function moveTaskInStorage(taskId, fromStatus, toStatus) {
-    syncTasksFromStorage();
 
     const map = {
         todo: { array: to_do_tasks, storage: 'toDoTasks' },
@@ -474,29 +452,30 @@ $(function () {
         connectWith: ".tasks_list",
         placeholder: "task_placeholder",
 
+        // EVENTO AO INICIAR O DRAG
         start: function (event, ui) {
-            syncTasksFromStorage();
-
-            const originColumn = ui.item.closest(".col").data("column");
-            ui.item.data("fromStatus", originColumn);
+            const originColumn = ui.item.closest(".col").data("column"); // coluna de origem
+            ui.item.data("fromStatus", originColumn); // armazena a coluna de origem na task
         },
 
+        // EVENTO AO SOLTAR A TASK EM OUTRA COLUNA
         receive: function (event, ui) {
-            const taskContent = ui.item;
-            const taskBox = taskContent.find(".task_box");
+            // PEGAR INFORMAÇÕES DA TASK MOVIDA
+            const taskContent = ui.item; // a task que foi movida
+            const taskBox = taskContent.find(".task_box"); // achar a classe task_box dentro da task
             if (!taskBox.length) return;
 
-            const taskId = String(taskBox.attr("id"));
+            const taskId = String(taskBox.attr("id")); // ID da task
 
-            const fromStatus = taskContent.data("fromStatus");
-            const toStatus = $(this).closest(".col").data("column");
+            const fromStatus = taskContent.data("fromStatus"); // coluna de origem
+            const toStatus = $(this).closest(".col").data("column"); // coluna de destino
 
             if (!fromStatus || !toStatus || fromStatus === toStatus) return;
 
-            moveTaskInStorage(taskId, fromStatus, toStatus);
-            taskContent.attr("data-status", toStatus);
+            moveTaskInStorage(taskId, fromStatus, toStatus); // chamando a função para mover a task no localStorage
+            taskContent.attr("data-status", toStatus); // atualiza o atributo data-status da task
 
-            // 🔴 atualiza ordem da coluna destino
+            // ATUALIZA A ORDEM DAS TASKS NAS DUAS COLUNAS
             updateColumnOrder(toStatus);
 
             countTasks();
@@ -506,7 +485,7 @@ $(function () {
             const status = ui.item.closest(".col").data("column");
             if (!status) return;
 
-            // 🔴 atualiza ordem da coluna quando rearranjar
+            // ATUALIZA A ORDEM DAS TASKS NA COLUNA
             updateColumnOrder(status);
         }
     }).disableSelection();
